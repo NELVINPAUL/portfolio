@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style type="text/css">
+:root {
+            --bg-dark: #0a0a0e;
+            --bg-panel: #16161c; 
+            --sl-green: #00e676;
+            --sl-gold: #ffd700;
+            --sl-red: #ff4444;
+            --text-main: #ffffff;
+            --text-mute: #9ca3af;
+            --nav-glass: rgb(22, 22, 28, 0.85);
+            --card-hover: #1e1e24;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            padding-top: 80px; 
+            overflow-x: hidden;
+        }
+.quote-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: radial-gradient(circle at center, rgba(20,20,20,1) 0%, rgba(0,0,0,1) 100%);
+    border: 1px solid #333;
+    position: relative;
+    overflow: hidden;
+}
+.quote-icon {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+.glitch-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+}
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff0055; /* alz */
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #00e676; 
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+.sub-text {
+    font-size: 1.8rem;
+    color: #888;
+    font-family: 'Fira Code', monospace;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.danger-word {
+    color: #ff4444; /* Alhaaz */
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 68, 68, 0.4);
+}
+.quote-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--sl-gold);
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+.line {
+    width: 40px;
+    height: 1px;
+    background: #333;
+}
+@keyframes glitch-anim {
+    0% { clip: rect(42px, 9999px, 44px, 0); }
+    5% { clip: rect(12px, 9999px, 59px, 0); }
+    10% { clip: rect(48px, 9999px, 29px, 0); }
+    15.0% { clip: rect(42px, 9999px, 73px, 0); }
+    20% { clip: rect(63px, 9999px, 27px, 0); }
+    100% { clip: rect(0, 0, 0, 0); }
+}
+@media (max-width: 600px) {
+    .glitch-text { font-size: 1.5rem; }
+    .sub-text { font-size: 1rem; }
+}
+
+
+        .code-font { font-family: 'Fira Code', monospace; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; margin: 40px 0; }
+
+        .dp-wrapper {
+            width: 150px; height: 150px; margin: 0 auto 20px; position: relative;
+        }
+        .profile-img {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: url('https://i.ibb.co/3YzfvphS/wp13096486.jpg') center/cover;                                    
+            border: 4px solid var(--bg-panel); position: relative; z-index: 2;
+        }
+        .rank-ring {
+            position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%; border: 2px solid var(--sl-green);
+            border-top-color: transparent; animation: spin 3s linear infinite; z-index: 1;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -1px; }
+
+        .badges-row {
+            display: flex; justify-content: center; gap: 10px;
+            flex-wrap: wrap; margin-bottom: 25px;
+        }
+
+        .status-badge {
+            background: #222; color: var(--sl-green); border: 1px solid #333;
+            padding: 5px 12px; border-radius: 4px;
+            font-size: 0.8rem; font-family: 'Fira Code', monospace;
+        }
+        .badge-gold { color: var(--sl-gold); border-color: rgba(255, 215, 0, 0.3); }
+        .badge-green { color: var(--sl-green); border-color: rgba(0, 230, 118, 0.3); }
+
+        .follow-btn {
+            display: inline-block; background-color: var(--sl-green); color: #000;
+            font-weight: 700; padding: 12px 30px; border-radius: 50px;
+            text-decoration: none; transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.3);
+            text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;
+        }
+        .follow-btn:active { transform: scale(0.95); }
+
+        .panel {
+            background-color: var(--bg-panel); border-radius: 12px;
+            padding: 30px; margin-bottom: 25px; border: 1px solid #2a2a30;
+        }
+
+        .section-header {
+            font-family: 'Fira Code', monospace; color: var(--text-mute);
+            margin-bottom: 25px; border-bottom: 1px solid #333;
+            padding-bottom: 10px; display: flex; align-items: center; gap: 10px;
+            font-weight: 600;
+        }
+        .section-header span { color: var(--sl-green); }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px; text-align: center;
+        }
+
+        .stat-value { font-size: 1.8rem; font-weight: 700; color: #fff; }
+        .stat-label { font-size: 0.8rem; color: var(--text-mute); margin-top: 5px; }
+
+        .charts-wrapper {
+            display: flex; flex-wrap: wrap; justify-content: space-around;
+            gap: 40px; text-align: center;
+        }
+        .chart-box { display: flex; flex-direction: column; align-items: center; }
+
+        .pie-chart {
+            width: 140px; height: 140px; border-radius: 50%;
+            position: relative; margin-bottom: 15px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .pie-chart::after {
+            content: ""; position: absolute; width: 110px; height: 110px;
+            background: var(--bg-panel); border-radius: 50%;
+        }
+        .chart-text { position: relative; z-index: 5; font-weight: bold; font-size: 1.2rem; font-family: 'Fira Code', monospace; }
+
+        .c-courses { background: conic-gradient(var(--sl-green) 0% 70%, var(--sl-gold) 70% 100%); }
+        .c-battles { background: conic-gradient(var(--sl-green) 0% 67%, var(--sl-gold) 67% 94%, var(--sl-red) 94% 100%); }
+
+        .legend { font-size: 0.8rem; color: var(--text-mute); display: flex; flex-direction: column; gap: 5px; margin-top: 5px; text-align: left; }
+        .dot { width: 8px; height: 8px; display: inline-block; border-radius: 50%; margin-right: 5px; }
+
+        .bio-text {
+            line-height: 1.6; color: #ccc; margin-bottom: 20px;
+            border-left: 3px solid var(--sl-gold); padding-left: 15px;
+            background: rgba(255, 215, 0, 0.05); padding: 15px; border-radius: 0 4px 4px 0;
+        }
+        .p-content {
+    padding: 25px; 
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+    border:2px solid green;
+}
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .info-item { margin-bottom: 10px; }
+        .info-label { color: var(--sl-green); font-size: 0.75rem; display: block; margin-bottom: 4px; font-family: 'Fira Code'; }
+
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; perspective: 1000px; }
+        
+        @media (max-width: 768px) {
+        .header-strip { padding: 0 20px; height: 70px; }
+        
+        .project-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0; 
+    border-radius: 12px;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid var(--sl-green);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.project-card:hover {
+    background: var(--card-hover);
+    border-color: var(--sl-green);
+    transform: translateY(-10px) rotateX(2deg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.p-thumb {
+    width: 100%;
+    height: 130px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 -20px 30px rgba(0,0,0,0.6); 
+}
+
+.code-thumb-pattern {
+    background-color: #131318;
+    background-image:
+        linear-gradient(to right, #569cd6 40px, transparent 40px),
+        linear-gradient(to right, #9cdcfe 50px, transparent 50px),
+        linear-gradient(to right, #b5cea8 30px, transparent 30px),
+        linear-gradient(to right, var(--sl-green) 120px, transparent 120px),
+        linear-gradient(to right, #6a9955 180px, transparent 180px);
+    background-size:
+        40px 8px, 50px 8px, 30px 8px,
+        120px 10px,
+        180px 8px;
+    background-position:
+        20px 35px, 70px 35px, 130px 35px,
+        20px 60px,
+        20px 85px;
+    background-repeat: no-repeat;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .code-thumb-pattern {
+    transform: scale(1.05);
+}
+
+.p-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.p-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; z-index: 2; }
+.p-name { font-weight: 700; font-size: 1.2rem; transition: 0.3s; }
+.project-card:hover .p-name { color: var(--sl-green); text-shadow: 0 0 10px rgba(0,230,118,0.3); }
+
+.p-desc { font-size: 0.85rem; color: var(--text-mute); margin-bottom: 20px; line-height: 1.5; z-index: 2; }
+
+.p-footer { margin-top: auto; display: flex; gap: 8px; z-index: 2; align-items: center; }
+
+.run-icon {
+    margin-left: auto;
+    width: 30px; height: 30px; border-radius: 50%; background: #222;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-mute); font-size: 0.8rem;
+    border: 1px solid #333;
+    background: var(--sl-green); color: #000; border-color: var(--sl-green);
+}
+        .main-footer {
+            background: #000;
+            border-top: 1px solid #2a2a30;
+            padding: 60px 0 20px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            max-width: 1000px; margin: 0 auto; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px; margin-bottom: 40px;
+        }
+
+        .footer-col h3 { color: #fff; margin-bottom: 20px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .footer-col h3 i { color: var(--sl-green); }
+        .footer-col p { color: var(--text-mute); font-size: 0.9rem; line-height: 1.6; }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: var(--text-mute); text-decoration: none; font-size: 0.9rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+        .footer-links a:hover { color: var(--sl-green); padding-left: 5px; }
+        .footer-links a i { font-size: 0.7rem; }
+
+        .social-row { display: flex; gap: 15px; margin-top: 15px; }
+        .social-btn {
+            width: 40px; height: 40px; border-radius: 8px;
+            background: #1a1a1a; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s;
+            border: 1px solid #333;
+        }
+        .social-btn:hover { background: var(--sl-green); color: #000; transform: translateY(-3px); }
+
+        .footer-bottom {
+            text-align: center; padding-top: 20px; border-top: 1px solid #1a1a1a;
+            color: #555; font-size: 0.8rem; font-family: 'Fira Code', monospace;
+        }
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+          .logo span { color: var(--sl-green); }
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 50px; height: 50px; background: var(--sl-green);
+            color: #000; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; pointer-events: none;
+            transition: 0.3s; box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
+            z-index: 99; border: none; font-size: 1.2rem;
+        }
+        .back-to-top.active { opacity: 1; pointer-events: all; transform: translateY(0); }
+        .back-to-top:hover { transform: translateY(-5px); }
+    .group-container {
+        display: flex; flex-wrap: wrap; gap: 30px; align-items: center;
+    }
+    .group-info { flex: 2; min-width: 300px; }
+    .group-logo-area {
+        width: 80px; height: 80px; background: rgba(255,255,255,0.05);
+        border-radius: 12px; display: flex; align-items: center; justify-content: center;
+        font-size: 2.5rem; color: var(--sl-green); border: 1px solid #333; margin-bottom: 20px;
+    }
+    .owners-grid {
+        flex: 1; min-width: 250px;
+        display: flex; flex-direction: column; gap: 15px;
+    }
+    .owner-card {
+        display: flex; align-items: center; gap: 15px;
+        background: rgba(255,255,255,0.03); padding: 15px;
+        border-radius: 8px; border: 1px solid transparent;
+        text-decoration: none; transition: 0.3s;
+    }
+    .owner-card:hover {
+        background: rgba(0, 230, 118, 0.1); border-color: var(--sl-green);
+        transform: translateX(5px);
+    }
+    
+    .owner-avatar {
+        width: 50px; height: 50px; border-radius: 50%;
+        background: #222; border: 2px solid var(--text-mute);
+        object-fit: cover;
+    }
+    .owner-details h4 { color: #fff; font-size: 1rem; margin-bottom: 3px; }
+    .owner-details span { font-size: 0.75rem; color: var(--sl-gold); font-family: 'Fira Code'; }
+    
+.header-strip {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 80px;
+    background: rgba(10, 10, 14, 0.85); 
+    backdrop-filter: blur(12px); /* Alhaaz */
+    border-bottom: 1px solid rgba(0, 230, 118, 0.2); 
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 30px; z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5); 
+}
+.header-strip .logo {
+    font-size: 1.6rem; font-weight: 900; color: #fff;
+    font-family: 'Fira Code', monospace; text-decoration: none;
+    letter-spacing: -1px;
+}
+.header-strip .logo span { color: var(--sl-green); }
+
+.menu-btn {
+    font-size: 1.4rem; color: var(--sl-green); cursor: pointer;
+   border: 1px solid rgba(255,255,255,0.1); 
+    padding: 10px 14px; border-radius: 8px;
+    background: rgba(255,255,255,0.03);
+    transition: all 0.3s ease;
+}
+.menu-btn:hover { 
+    background: var(--sl-green); 
+    color: #000; 
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); /* Alhaaz */
+}
+#nav-toggle {
+    display: none;
+}
+.overlay {
+    height: 100%;
+    width: 0; 
+    position: fixed; 
+    z-index: 2000;
+    top: 0; 
+    right: 0;
+    background-color: #08080b;
+    overflow-x: hidden; 
+    transition: 0.4s;
+    border-left: 0px solid transparent;
+}
+#nav-toggle:checked ~ .overlay {
+    width: 50%; /* Alhaaz */
+    border-left: 2px solid var(--sl-green); 
+    box-shadow: -20px 0 50px rgba(0,0,0,0.9);
+}
+.overlay-content { opacity: 0; transition: 0.2s; }
+#nav-toggle:checked ~ .overlay .overlay-content { opacity: 1; transition-delay: 0.3s; }
+
+.overlay-content { 
+    position: relative; 
+    top: 15%; 
+    width: 100%; 
+    display: flex; 
+    flex-direction: column;
+    padding-left: 20px; 
+    
+}
+.overlay a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1.4rem; 
+    color: var(--text-mute);
+    display: block;
+    transition: 0.3s;
+    font-weight: 600;
+    font-family: 'Fira Code', monospace;
+    border-bottom: 1px solid rgba(255,255,255,0.03); 
+    border-left: 3px solid transparent;     
+}
+.overlay a:hover {
+    color: #fff;
+    background: linear-gradient(90deg, rgba(0, 230, 118, 0.1), transparent);
+    padding-left: 35px;
+    border-left: 3px solid var(--sl-green); 
+    border-left: 2px solid var(--sl-green);
+}
+.closebtn {
+    position: absolute; top: 15px; right: 25px;
+    font-size: 40px; 
+    color: var(--text-mute) !important;
+    border: none !important; 
+    background: none !important;
+    transition: 0.3s;
+}
+.closebtn:hover {
+    color: var(--sl-red) !important;
+    transform: rotate(90deg); /* Alhaaz */
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: var(--sl-green);
+    margin-left: 5px;
+}
+.contact-form input, 
+.contact-form textarea {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 8px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: var(--sl-green);
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
+    background: rgba(0, 230, 118, 0.05);
+}
+.send-btn {
+    background: transparent;
+    color: var(--sl-green);
+    border: 1px solid var(--sl-green);
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Fira Code', monospace;
+    text-transform: uppercase;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.send-btn:hover {
+    background: var(--sl-green);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
+    transform: translateY(-3px);
+}
+@media (max-width: 768px) {
+    .send-btn { width: 100%; justify-content: center; }
+}
+.hobby-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0;
+}
+.hobby-tag {
+    position: relative;
+    padding: 12px 25px;
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius:none; 
+    color: #ccc;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+}
+.hobby-tag i {
+    color: var(--sl-green);
+    transition: 0.3s;
+}
+.hobby-tag:hover {
+    transform: translateY(-5px) scale(1.05);
+    color: #000; 
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    border-color: transparent;
+}
+/* Alhaaz */
+.hobby-tag::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--tag-color, #fff); /* Alhaaz */
+    z-index: -1;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: scaleX(0); 
+    transform-origin: left;
+}
+.hobby-tag:hover::before {
+    transform: scaleX(1); 
+}
+.hobby-tag:nth-child(4n+1) { --tag-color: #ff0055; } /* pink */
+.hobby-tag:nth-child(4n+2) { --tag-color: #00d3ff; } /* green */
+.hobby-tag:nth-child(4n+3) { --tag-color: #01d2ff; } /* cyan */
+.hobby-tag:nth-child(4n+4) { --tag-color: #aa00ff; } 
+.hobby-tag.legendary {
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    animation: pulse-gold 2s infinite;
+}
+.hobby-tag.legendary i { color: #FFD700; }
+.hobby-tag.legendary:hover {
+    background: #FFD700;
+    color: #000;
+    box-shadow: 0 0 30px #FFD700;
+}
+.hobby-tag.legendary:hover i { color: #000; }
+@keyframes pulse-gold {
+    0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+@media (max-width: 600px) {
+    .hobby-tag { padding: 10px 15px; font-size: 0.8rem; }
+}
+.tile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 25px;
+    padding: 20px 10px;
+}
+.tile {
+    position: relative;
+    height: 130px;
+    background: #0a0a0e; 
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.5s;
+    z-index: 1; 
+}
+.tile::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, var(--color));
+    animation: rotate 4s linear infinite;
+    z-index: -2; /* alz */
+}
+.tile::after {
+    content: '';
+    position: absolute;
+    inset: 3px; 
+    background: #101014; 
+    border-radius: 14px;
+    z-index: -1;
+}
+.tile i {
+    font-size: 2.5rem;
+    color:var(--color);
+    margin-bottom: 12px;
+    transition: 0.3s;
+    z-index: 2;
+    filter: drop-shadow(0 0 0 transparent);
+}
+.tile h3 {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: #666;
+    z-index: 2;
+    transition: 0.3s;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.tile:hover {
+    transform: translateY(-10px);
+}
+.tile:hover::before { animation: rotate 1.5s linear infinite; }
+.tile:hover i { color: var(--color); filter: drop-shadow(0 0 15px var(--color)); }
+.tile:hover h3 { color: #fff; text-shadow: 0 0 5px var(--color); }
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.tile-orange { --color: #E34F26; }
+.tile-blue   { --color: #1572B6; }
+.tile-yellow { --color: #F7DF1E; }
+.tile-py     { --color: #3776AB; }
+.tile-java   { --color: #f89820; }
+.tile-cpp    { --color: #00599C; }
+.tile-c      { --color: #A8B9CC; }
+.tile-csharp { --color: #9b4f96; }
+.tile-php    { --color: #777BB4; }
+.tile-react  { --color: #61DAFB; }
+.tile-redux  { --color: #764ABC; }
+.tile-ai     { --color: #00BFA5; }
+.tile-llm    { --color: #6200ea; }
+.tile-prompt { --color: #00ff41; }
+.tile-white  { --color: #ffffff; }
+.tile-jira   { --color: #0052CC; }
+.tile-seo    { --color: #85bb65; }
+.tile-plan   { --color: #FFD700; }
+.tile-sky    { --color: #007ACC; }
+.stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+.stat-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 140px;
+    border-color: var(--stat-color);
+}
+/*icon stats*/
+.stat-icon {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 3rem;
+    opacity: 0.1; /* alz */
+    transition: 0.4s;
+    color: var(--stat-color);
+}
+.stat-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 5px;
+    font-family: 'Inter', sans-serif;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 2;
+    color: var(--stat-color);
+}
+.stat-name {
+    font-size: 0.8rem;
+    color: #888;
+    font-family: 'Fira Code', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+.stat-bar {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0%; 
+    height: 4px;
+    background: var(--stat-color);
+    transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 -5px 15px var(--stat-color);
+}
+.stat-box:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.05);
+}
+.stat-box:hover .stat-bar { width: 100%; } /* alz */
+.stat-box:hover .stat-num {  color: var(--stat-color);} 
+.stat-box:hover .stat-icon { 
+    opacity: 0.2; 
+    transform: rotate(-10deg) scale(1.2); 
+}
+.st-green  { --stat-color: #00e676; }
+.st-gold   { --stat-color: #ffd700; }
+</style>
+<script>
+window.onload=()=>{
+     const counters = document.querySelectorAll('.counter');
+    const runAnimation = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 2000; 
+        const increment = target / (duration / 16); 
+        let current = 0;
+        
+        const updateCount = () => {
+            current += increment;
+            if (current < target) {
+                counter.innerText = Math.ceil(current);
+                requestAnimationFrame(updateCount);
+            } else {
+                counter.innerText = target; 
+            }
+        };
+        updateCount();
+    };
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                runAnimation(counter);
+                observer.unobserve(counter); 
+            }
+        });
+    }, { threshold: 0.5 }); 
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+    const backToTopBtn = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add("active");
+        } else {
+            backToTopBtn.classList.remove("active");
+        }
+    });
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    // Alhaaz
+    function toggleMenu() {
+        var nav = document.getElementById("navOverlay");
+        if (nav.style.width === "40%") {
+            nav.style.width = "0";
+        } else {
+            nav.style.width = "40%";
+        }
+    }
+}
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<script 
+<input type="checkbox" id="nav-toggle">
+
+<div class="header-strip">
+    <a href="#" class="logo">NELVIN PAUL ELEGWA<span>.</span>PORT<span></span></a>
+    
+    <label for="nav-toggle" class="menu-btn">
+        <i class="fas fa-bars"></i>
+    </label>
+</div>
+<div class="overlay">
+    <label for="nav-toggle" class="closebtn">&times;</label>
+    
+    <div class="overlay-content">
+       <a href="#top">Profile</a>
+          <a href="#stats">Stats</a>
+        <a href="#about">About</a>
+        <a href="#skill">Hobbies</a>
+        <a href="#projects">Code</a>
+        <a href="#community">Group</a>
+        <a href="#con">Quote</a>
+        <a href="#foot">Footer</a>
+     
+    </div>
+</div>
+
+<div id="top" class="container">    
+    <header>
+        <div class="dp-wrapper">
+            <div class="rank-ring"></div>
+            <div class="profile-img"></div>
+        </div>
+        <h1>ALHAAZ</h1>
+        <div class="badges-row">
+            <span class="status-badge">LVL 17 PLATINUM</span>
+            <span class="status-badge badge-green">C++ Expert</span>
+            <span class="status-badge badge-green">HELPER</span>
+        </div>        
+        <a href="https://www.sololearn.com/profile/29054729/?ref=app" target="_blank" class="follow-btn">
+            + Follow on SoloLearn
+        </a>
+    </header>
+    <section id="stats" class="panel">
+     <div class="section-header"><span>//</span> STATS</div>
+     <div class="panel" id="stats">
+      <div class="stats-dashboard">
+        <div class="stat-box st-green">
+            <div class="stat-icon"><i class="fas fa-fire"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="400">0</span>+</div>
+                <div class="stat-name">Day Streak</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+        <div class="stat-box st-gold">
+            <div class="stat-icon"><i class="fas fa-code"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="50">0</span>+</div>
+                <div class="stat-name">Published Codes</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+        <div class="stat-box st-green">
+            <div class="stat-icon"><i class="fas fa-crown"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="3">0</span>+</div>
+                <div class="stat-name">Times Global #1 Hits</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+        <div class="stat-box st-gold">
+            <div class="stat-icon"><i class="fas fa-comment-dots"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="1000">0</span>+</div>
+                <div class="stat-name">Answers</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+        <div class="stat-box st-green">
+            <div class="stat-icon"><i class="fas fa-fist-raised"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="100">0</span>+</div>
+                <div class="stat-name">Challenge Wins(Day)</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+        <div class="stat-box st-gold">
+            <div class="stat-icon"><i class="fas fa-star"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="160">0</span>k+</div>
+                <div class="stat-name">Total XP</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+        <div class="stat-box st-green">
+            <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="35">0</span>+</div>
+                <div class="stat-name">Certificates</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+        <div class="stat-box st-gold">
+            <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="80">0</span>k+</div>
+                <div class="stat-name">XP (Month)</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+
+         <div class="stat-box st-green">
+            <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="22">0</span>k+</div>
+                <div class="stat-name">XP (Day Record)</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+        
+        <div class="stat-box st-gold">
+            <div class="stat-icon"><i class="fas fa-medal"></i></div>
+            <div class="stat-info">
+                <div class="stat-num"><span class="counter" data-target="25">0</span>+</div>
+                <div class="stat-name">Badges</div>
+            </div>
+            <div class="stat-bar"></div>
+        </div>
+        </div>
+    </div>
+    </section>
+    <section id="challenges" class="panel">
+        <div class="section-header"><span>//</span> CODING CHALLENGES ANALYTICS</div>
+        <div class="charts-wrapper">
+            
+            <div class="chart-box">
+                <div class="pie-chart c-courses">
+                    <div class="chart-text">WINS</div>
+                </div>
+                <div class="legend">
+                    <span><span class="dot" style="background:var(--sl-green)"></span>C++</span>                
+                    <span><span class="dot" style="background:var(--sl-gold)"></span>HTML, Py, Java & C</span>
+                </div>
+            </div>
+            <div class="chart-box">
+                <div class="pie-chart c-battles">
+                    <div class="chart-text">ALL</div>
+                </div>
+                <div class="legend">
+                    <span><span class="dot" style="background:var(--sl-green)"></span> 6k+ Won</span>
+                    <span><span class="dot" style="background:var(--sl-gold)"></span> 3.1k+ Draw</span>
+                    <span><span class="dot" style="background:var(--sl-red)"></span> 1k+ Lost</span>
+                </div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:20px; font-size:0.8rem; color:var(--sl-red); font-family:'Fira Code'">
+            NOTE: Data represents all-time statistics, since i joined.
+        </div>
+        
+    </section>
+    <section id="about" class="panel">
+        <div class="section-header"><span>//</span> ABOUT ME</div>
+        
+        <p class="bio-text">
+            Hey There! Myself <strong>Alhaaz</strong>. I have a keen interest in the world of technology and engineering. I'm always curious about how things actually works, from a simple pen to a complex car engine. My goal is to deconstruct and understand the mechanics of the world around me.
+        </p>
+        
+        <div class="info-grid">
+            <div class="info-item">            
+                <span class="info-label">FAV PET</span>
+                <span class="status-badge badge-gold">Cats</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">FAV GAME</span>
+                <span class="status-badge badge-gold">Chess</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">FAV BOOK</span>
+                <span class="status-badge badge-gold">The Great Gatsby </span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">FAV FOOD</span>
+                <span class="status-badge badge-gold">Pasta</span>
+            </div>
+              <div class="info-item">
+                <span class="info-label">FAV MOVIE</span>
+                <span class="status-badge badge-gold">The Dark Knight</span>
+            </div>
+              <div class="info-item">
+                <span class="info-label">FAV WEB-SERIES</span>
+                <span class="status-badge badge-gold">Dark</span>
+            </div>
+              <div class="info-item">
+                <span class="info-label">FAV WILD ANIMAL</span>
+                <span class="status-badge badge-gold">Dageshtani Bears</span>
+            </div>
+              <div class="info-item">
+                <span class="info-label">FAV SEASON</span>
+                <span class="status-badge badge-gold">SUMMER</span>
+            </div>
+              <div class="info-item">
+                <span class="info-label">FAV PLACE</span>
+                <span class="status-badge badge-gold">Countryside</span></div>
+                  <div class="info-item">
+                <span class="info-label">FAV P.LANGUAGE</span>
+                <span class="status-badge badge-gold">C++</span>            
+        </div>
+            </div>
+                <div style="text-align:center; margin-top:20px; font-size:0.8rem; color:var(--sl-red); font-family:'Fira Code'">
+            [Feel free to ask Any question in this code's comment, i will try to Answer.]
+        </div>
+    </section>
+    <section id="skill" class="panel">
+        <div class="section-header"><span>//</span> SKILLS & HOBBIES</div>
+       
+        <div class="panel" id="hobbies">
+    <div class="section-header">
+        <i class="fas fa-gamepad"></i>HOBBIES
+    </div>
+
+    <div class="hobby-cloud">
+        
+        <div class="hobby-tag"><i class="fas fa-camera"></i> Photography</div>
+        <div class="hobby-tag"><i class="fas fa-magic"></i> Editing</div>
+        <div class="hobby-tag"><i class="fas fa-motorcycle"></i> Riding</div>
+        <div class="hobby-tag"><i class="fas fa-plane"></i> Travelling</div>
+        <div class="hobby-tag"><i class="fas fa-brain"></i> Learning</div>
+        <div class="hobby-tag"><i class="fas fa-pen-nib"></i> Calligraphy</div>
+        <div class="hobby-tag"><i class="fas fa-code"></i>Coding</div>
+        
+        <div class="hobby-tag legendary">
+            <i class="fas fa-fire"></i> Can Cook Rice in 58s
+        </div>
+   <div class="hobby-tag"><i class="fas fa-volleyball"></i>Volleyball</div>
+      <div class="hobby-tag"><i class="fas fa-water"></i>Swiming</div>
+        <div class="hobby-tag"><i class="fas fa-chess-knight"></i> Chess/Soduku</div>
+        <div class="hobby-tag"><i class="fas fa-border-all"></i>Rafting</div>
+           <div class="hobby-tag"><i class="fas fa-question"></i>Debate</div>
+        <div class="hobby-tag"><i class="fas fa-plus"></i> And ETC...</div>
+
+    </div>
+</div>
+<div class="panel" id="tech-grid">
+    <div class="section-header">
+        <i class="fas fa-microchip"></i>SKILLS</span>
+    </div>
+    <div class="tile-grid">
+        
+        <div class="tile tile-orange"><i class="fab fa-html5"></i><h3>HTML</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-blue"><i class="fab fa-css3-alt"></i><h3>CSS</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-yellow"><i class="fab fa-js"></i><h3>JS</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-py"><i class="fab fa-python"></i><h3>PYTHON</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-java"><i class="fab fa-java"></i><h3>JAVA</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-cpp"><i class="fas fa-code"></i><h3>C++</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-c"><i class="fas fa-copyright"></i><h3>C</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-csharp"><i class="fas fa-hashtag"></i><h3>C#</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-php"><i class="fab fa-php"></i><h3>PHP</h3><div class="tile-glow"></div></div>
+
+        <div class="tile tile-react"><i class="fab fa-react"></i><h3>REACT</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-redux"><i class="fas fa-layer-group"></i><h3>REDUX</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-ai"><i class="fas fa-brain"></i><h3>AI / ML</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-llm"><i class="fas fa-language"></i><h3>LLM</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-prompt"><i class="fas fa-terminal"></i><h3>PROMPT ENG</h3><div class="tile-glow"></div></div>
+                <div class="tile tile-java"><i class="fab fa-x"></i><h3>UI/UX</h3><div class="tile-glow"></div></div>
+<div class="tile tile-llm"><i class="fas fa-square"></i><h3>FIGMA</h3><div class="tile-glow"></div></div>
+<div class="tile tile-llm"><i class="fas fa-robot"></i><h3>APIs</h3><div class="tile-blue"></div></div>
+
+        <div class="tile tile-py"><i class="fas fa-star"></i><h3>COLOR THEORY</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-white"><i class="fab fa-github"></i><h3>GIT</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-jira"><i class="fab fa-jira"></i><h3>JIRA</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-seo"><i class="fas fa-search-dollar"></i><h3>SEO</h3><div class="tile-glow"></div></div>         
+        <div class="tile tile-llm"><i class="fas fa-computer"></i><h3>LINUX/UNIX</h3><div class="tile-glow"></div></div>
+        <div class="tile tile-plan"><i class="fas fa-tasks"></i><h3>PLANNING</h3><div class="tile-glow"></div></div>
+    </div>
+</div>
+    </section>
+    <section id="projects" class="panel">
+        <div class="section-header"><span>//</span> FAV. CODES ON SOLOLEARN</div>
+        <div class="project-grid">
+        <span class="status-badge badge-green">• Click to seek • SL Codes</span>
+            <a href="https://sololearn.com/compiler-playground/c7Savepr31uq/?ref=app" class="project-card">         
+            <div class="p-thumb code-thumb-pattern">
+    </div>
+    <div class="p-content">
+                <div class="p-top">
+                    <span class="p-name">Numerical Words</span>
+                </div>
+                <div class="p-desc">An algorithm to convert numbers into words efficiently.</div>
+                <div class="p-footer">
+                    <span class="status-badge badge-gold">C++</span>
+                    <div class="run-icon"><i class="fas fa-play"></i></div>
+                </div>
+                </div>
+            </a>
+            <a href="https://sololearn.com/compiler-playground/W25nE1Z7q3u4/?ref=app" class="project-card">
+            <div class="p-thumb code-thumb-pattern">
+    </div>
+    <div class="p-content">
+                <div class="p-top">
+                    <span class="p-name">Aladdin Runner</span>
+                </div>
+                <div class="p-desc">An endless runner game created specially for Eid</div>
+                <div class="p-footer">
+                     <span class="status-badge badge-gold">JS</span>
+                     <span class="status-badge badge-gold">Canvas</span>
+                     <div class="run-icon"><i class="fas fa-gamepad"></i></div>
+                     </div>
+                </div>
+            </a>
+            <a href="https://sololearn.com/compiler-playground/W10UfFmfFh43/?ref=app" class="project-card">
+                <div class="p-thumb code-thumb-pattern">
+    </div>
+    <div class="p-content">
+            <div class="p-top">
+                    <span class="p-name">St.Patrick Game</span>
+                </div>
+                <div class="p-desc">An endless tapping game, which gives fortune and saticfaction</div>
+                <div class="p-footer">
+                     <span class="status-badge badge-gold">JS</span>
+                     <span class="status-badge badge-gold">Canvas</span>
+                     <div class="run-icon"><i class="fas fa-gamepad"></i></div>
+                     </div>
+                </div>
+            </a>
+            <a href="https://sololearn.com/compiler-playground/WSwqTJFJBGeC/?ref=app" class="project-card">
+            <div class="p-thumb code-thumb-pattern">
+    </div>
+    <div class="p-content">
+                <div class="p-top">
+                    <span class="p-name">Flappy Bee</span>
+                </div>
+<div class="p-desc">A recreation of the classic Flappy Bird but this time, it's a BEE!!</div>
+                <div class="p-footer">
+                    <span class="status-badge badge-gold">HTML/JS</span>
+                    <div class="run-icon"><i class="fas fa-gamepad"></i></div>
+                </div>
+                </div>
+            </a>
+            <a href="https://sololearn.com/compiler-playground/WLmhNqswy9ap/?ref=app" class="project-card">
+            <div class="p-thumb code-thumb-pattern">
+    </div>
+    <div class="p-content">
+                <div class="p-top">
+                    <span class="p-name">LoveCollector</span>
+                </div>
+                <div class="p-desc">A collaborative coding project made for valentines Day</div>
+                <div class="p-footer">
+                    <span class="status-badge badge-gold">Canvas</span>
+                    <div class="run-icon"><i class="fas fa-heart"></i></div>
+                </div>
+                </div>
+            </a>
+            <a href="https://sololearn.com/compiler-playground/WO6U9O0erFPX/?ref=app" class="project-card">
+            <div class="p-thumb code-thumb-pattern">
+    </div>
+    <div class="p-content">
+                <div class="p-top">
+                    <span class="p-name">Password Game</span>
+                </div>
+                <div class="p-desc">Password maker, follow the conidtions and make a strong password!</div>
+                <div class="p-footer">
+                    <span class="status-badge badge-gold">JS/CSS</span>
+                    <div class="run-icon"><i class="fas fa-key"></i></div>
+                </div>
+                </div>
+            </a>
+        </div>
+    </section>
+</div>
+    <section id="community" class="panel">
+        <div class="section-header"><span>//</span> OUR CODING GROUP</div>
+        <div class="group-container">
+            <div class="group-info">        
+                <h2 style="margin-bottom: 10px; color: #fff;">CODERHUB <<span>/</span>></h2> <p style="color: var(--text-mute); line-height: 1.6; margin-bottom: 20px;">
+                    A community built for active and enthusiastic coders who love to learn and spread knowledge. Join now!
+                </p>
+                <div class="badges-row" style="justify-content: flex-start;">
+                    <span class="status-badge">Private Group</span>
+                    <span class="status-badge badge-green">Coders</span>
+                </div>
+            </div>
+            
+     <a href="https://sololearn.com/compiler-playground/WLht1vOT3tLt/?ref=app" class="project-card">
+     <div class="p-thumb code-thumb-pattern">
+    </div>
+ <div class="p-content">
+                <div class="p-top">
+                    <span class="p-name">RuleBook</span>
+                    <span class="status-badge badge-green">    [Click to seek]</span>
+                </div>
+<div class="p-desc">Check-out the CoderHub's Rulebook!</div>
+                <div class="p-footer">
+                    <span class="status-badge badge-gold">HTML/CSS</span>
+                    <div class="run-icon"><i class="fas fa-book"></i></div>
+                </div>
+                </div>
+            </a>
+            <div class="owners-grid">
+                <a href="https://www.sololearn.com/profile/29054729/?ref=app" target="_blank" class="owner-card">
+                    <img src="https://i.ibb.co/SXjyR6Y0/wp13096486.jpg" class="owner-avatar" alt="Me">
+                    <div class="owner-details">
+                        <h4>Alhaaz</h4>
+                        <span><i class="fas fa-crown"></i> Admin</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--sl-green); margin-left:auto;"></i>
+                </a>
+                <a href="https://www.sololearn.com/profile/28592787/?ref=app" target="_blank" class="owner-card">
+                    <img src="https://i.ibb.co/5xX2wK1b/IMG-20260115-WA0000.jpg" class="owner-avatar" alt="Bro">
+                    <div class="owner-details">
+                        <h4>Gulshan Mahawar</h4> <span><i class="fas fa-crown"></i> Admin</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--sl-green); margin-left:auto;"></i>
+                </a>             
+                <a href="https://www.sololearn.com/profile/7885877/?ref=app" target="_blank" class="owner-card">
+                    <img src="https://i.ibb.co/CKnVGbMN/s-l1200.jpg" class="owner-avatar" alt="Bro">
+                    <div class="owner-details">
+                        <h4>BroFar</h4> <span><i class="fas fa-crown"></i> Admin</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--sl-green); margin-left:auto;"></i>
+                </a>             
+                <a href="https://www.sololearn.com/profile/23234819/?ref=app" target="_blank" class="owner-card">
+                    <img src="https://i.ibb.co/6KZ8MDX/2e415d252369d5c277ce5dd2a9b5a2dc-42afc33ed09c099d45d0282b125e5628.jpg" class="owner-avatar" alt="Bro">
+                    <div class="owner-details">
+                        <h4>Ausgrindtube</h4> <span><i class="fas fa-crown"></i> Admin</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:var(--sl-green); margin-left:auto;"></i>
+                </a>             
+                <a href="https://www.sololearn.com/profile/15811798/?ref=app" target="_blank" class="owner-card">
+                    <img src="https://i.ibb.co/Rp9Tycg9/IMG-20260102-131836-638.webp" class="owner-avatar" alt="Bro">
+                    <div class="owner-details">
+                        <h4>Cybercraft 🇮🇳</h4> <span><i class="fas fa-crown"></i> Admin</span>
+                    </div>                                                                    
+                    <i class="fas fa-chevron-right" style="color:var(--sl-green); margin-left:auto;"></i>
+                </a>        
+                </section>                   
+                <section id="con" class="panel">
+            <div class="panel quote-section">
+    <div class="quote-container">
+        <i class="fas fa-quote-left quote-icon"></i>
+        
+        <h1 class="glitch-text" data-text="STRENGTH WITHOUT">
+            STRENGTH WITHOUT
+        </h1>
+        
+        <h2 class="sub-text">
+            PURPOSE IS <span class="danger-word">MEANINGLESS</span>.
+        </h2>
+
+        <div class="quote-author">
+            <span class="line"></span>Anonymous<span class="line"></span>
+        </div>
+    </div>
+</div>
+    </section>
+<footer id="foot" class="main-footer">
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h3><i class="fas fa-terminal"></i> NELVIN PAUL ELEGWA</h3>
+            <p>Passionate about C++, Web Dev,cYBERSECURITY and Engineering mechanics</p>
+            <div class="social-row">
+                <a href="#" class="social-btn" onclick="alert('it\'s a secret 🤫'); return false"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-btn" onclick="alert('🤫'); return false"><i class="fab fa-github"></i></a>
+                         <a href="#" class="social-btn" onclick="alert('🤫'); return false"><i class="fab fa-twitter"></i></a>
+                              <a href="#" class="social-btn" onclick="alert('🤫'); return false"><i class="fab fa-codepen"></i></a>
+                
+                <a href="mailto:nelvinluyiya@gmail.com" class="social-btn"><i class="fab fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h3>Explore</h3>
+            <ul class="footer-links">
+                <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                <li><a href="#stats"><i class="fas fa-chevron-right"></i> Stats</a></li>
+                <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                <li><a href="mailto:alhaazmini@gmail.com"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 Nelvin. All Right Reserved.
+    </div>
+</footer>
+<button id="backToTop" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+</button>
+</body>
+</html>
